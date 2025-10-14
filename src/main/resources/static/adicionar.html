@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Filme</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Adicionar Novo Filme</h1>
+    <input type="text" id="nome" placeholder="Nome do Filme">
+    <input type="text" id="diretor" placeholder="Diretor">
+    <input type="number" id="anoLancamento" placeholder="Ano de Lançamento">
+    <button onclick="adicionar()">Salvar</button>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>
+
+<script>
+    const api = "/filmes";
+
+    async function adicionar() {
+        const resp = await fetch(api, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                nome: document.getElementById("nome").value,
+                diretor: document.getElementById("diretor").value,
+                anoLancamento: document.getElementById("anoLancamento").value
+            })
+        });
+        if (resp.ok) {
+            alert("Filme adicionado com sucesso!");
+            window.location.href = "/";
+        } else {
+            alert("Erro ao adicionar filme!");
+        }
+    }
+</script>
+</body>
+</html>

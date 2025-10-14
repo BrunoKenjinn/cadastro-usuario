@@ -1,4 +1,4 @@
-package com.java.aula.cadastro_usuario.infrastructure.entitys;
+package com.java.aula.cadastro_filmes.infrastructure.entitys;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,18 +8,21 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "usuario")
+@Table(name = "filme")
 @Entity
 
-public class Usuario {
+public class Filme {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "email", unique = true)
-    private String email;
-
     @Column(name = "nome")
     private String nome;
+
+    @Column(name = "diretor")
+    private String diretor;
+
+    @Column(name = "ano_lancamento")
+    private Integer anoLancamento;
 }

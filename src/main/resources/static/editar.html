@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Filme</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Editar Filme</h1>
+    <input type="hidden" id="id">
+    <input type="text" id="nome" placeholder="Nome do Filme">
+    <input type="text" id="diretor" placeholder="Diretor">
+    <input type="number" id="anoLancamento" placeholder="Ano de Lançamento">
+    <button onclick="atualizar()">Atualizar</button>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>
+
+<script>
+    const api = "/filmes";
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    async function carregarFilme() {
+        const resp = await fetch(`${api}/${id}`);
+        if (resp.ok) {
+            const data = await resp.json();
+            document.getElementById("id").value = data.id;
+            document.getElementById("nome").value = data.nome;
+            document.getElementById("diretor").value = data.diretor;
+            document.getElementById("anoLancamento").value = data.anoLancamento;
+        } else {
+            alert("Erro ao carregar dados do filme!");
+        }
+    }
+
+    async function atualizar() {
+        const resp = await fetch(`${api}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                nome: document.getElementById("nome").value,
+                diretor: document.getElementById("diretor").value,
+                anoLancamento: document.getElementById("anoLancamento").value
+            })
+        });
+        if (resp.ok) {
+            alert("Filme atualizado com sucesso!");
+            window.location.href = "/";
+        } else {
+            alert("Erro ao atualizar filme!");
+        }
+    }
+
+    window.onload = carregarFilme;
+</script>
+</body>
+</html>

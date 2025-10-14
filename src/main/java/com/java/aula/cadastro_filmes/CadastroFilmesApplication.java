@@ -1,13 +1,13 @@
-package com.java.aula.cadastro_usuario;
+package com.java.aula.cadastro_filmes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CadastroUsuarioApplication {
+public class CadastroFilmesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CadastroUsuarioApplication.class, args);
+		SpringApplication.run(CadastroFilmesApplication.class, args);
 	}
 
 }
